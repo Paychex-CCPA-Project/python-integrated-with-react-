@@ -1,0 +1,87 @@
+.centered{
+    float: left;
+    margin: 25px 10px;
+}
+
+.form-group {
+    position: relative;
+}
+.palceholder{
+    position: absolute;
+    top: 7px;
+    left: 8px;
+    color: #B1B1B1;
+    display: none;
+}
+input{
+    padding: 5px;
+}
+.email-group{
+    display: flex;
+
+}
+label {
+    font-wight: normal;
+    color: #B1B1B1;
+}
+.star{
+    color: red
+}
+.form-control{
+    border: none;
+    border-bottom: 1px solid;
+    width: 23%;
+}
+
+.form-City{
+    position: relative;
+}
+.form-City .city{
+
+    border:none;
+    position:relative;
+    border-bottom: 1px solid grey;
+    width: 30%;
+    padding: 10px;
+    margin-left: 10px;
+    margin-right:45px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+
+}
+.form-City label{
+    position: absolute;
+    right: 10px;
+    left: 15px;
+    top:1px;
+    color:grey
+}
+.SSN{
+
+  border:none;
+  border-bottom: 1px solid grey;
+  width: 15%;
+  padding: 10px;
+  margin-left: auto;
+  margin-right:auto;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.personals::after{
+  content:" *";
+  color: red;
+}
+#statesSelect{
+    position: relative;
+    border: none;
+    padding: 10px;
+    margin-left: 2px;
+    margin-right:30px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+#selectID{
+    vertical-align: top;
+
+}

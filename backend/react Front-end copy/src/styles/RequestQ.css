@@ -1,0 +1,31 @@
+.radioInput{
+    border-radius: 50%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 15px;
+    transform: scale(1.5);
+}
+#radioLabel{
+    padding: 10px;
+    color: black;
+}
+
+.required{
+    margin: 10px;
+}
+.required:after {
+    content:" *";
+    color: red;
+}
+
+#requstCheck{
+    margin: 10px;
+    padding: 6px;
+    color: black;
+    transform: scale(1.5);
+}
+.requestLabel{
+    color: black;
+    display: inline;
+}
+

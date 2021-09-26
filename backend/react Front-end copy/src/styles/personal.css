@@ -1,0 +1,35 @@
+.form-personal{
+    position: relative;
+}
+.form-personal .personal{
+    border:none;
+    position:relative;
+    border-bottom: 1px solid grey;
+    width: 25%;
+    padding: 10px;
+    margin-left: 10px;
+    margin-right:45px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+.form-personal label{
+    position: absolute;
+    right: 10px;
+    left: 15px;
+    top:1px;
+    color:grey
+}
+.form-personal input[type=date] {
+    color: transparent;
+}
+.form-personal .personalData{
+    border:none;
+    position:relative;
+    border-bottom: 1px solid grey;
+    width: 15%;
+    padding: 10px;
+    margin-left: 10px;
+    margin-right:45px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}

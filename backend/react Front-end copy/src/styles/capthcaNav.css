@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@ 300&display=swap');
+.nav_links{
+    list-style: none;
+
+}
+.header_nav{
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    padding: 3px 1%;
+}
+
+
+.nav_links li {
+    float: left;
+    display: inline-block;
+
+    padding: 19px 10px;
+    margin-left: 0;
+}
+.nav_links li input[type=checkbox]{
+    padding: 15px;
+    transform: scale(1.7);
+}
+
+
+ .nav_links li input[type=submit]{
+    background-color: dodgerblue;
+    font-family: 'Roboto', sans-serif;
+    padding: 10px;
+    font-size: 11pt;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transform: scale(1.2);
+}

@@ -1,0 +1,17 @@
+.captchaDiv{
+    width: 100%;
+    height: 100%;
+
+}
+.center{
+    height: 100%;
+    padding: 10px;
+
+}
+.captchaDiv #btn{
+
+
+    float: right;
+    margin-bottom: auto;
+    margin-top: auto;
+}

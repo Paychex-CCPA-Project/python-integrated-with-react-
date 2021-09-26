@@ -1,0 +1,54 @@
+.form-Adderess{
+    position: relative;
+
+}
+.form-Adderess .address{
+    display: inline-block;
+    border:none;
+    position:relative;
+    border-bottom: 1px solid grey;
+    width: 40%;
+    padding: 10px;
+    margin-left: 10px;
+    margin-right:25px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.form-Adderess label{
+    position: absolute;
+    right: 10px;
+    left: 15px;
+    top:1px;
+    color:grey
+}
+
+.address, label{
+    transition: all 0.2s;
+    touch-action: manipulation;
+}
+
+.address:placeholder-shown + label{
+    cursor: text;
+    max-width: 66.66%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transform-origin: left top;
+    transform: translate(0, 2.15rem) scale(1.1);
+}
+
+
+::placeholder{
+    opacity: 0;
+    transition: inherit;
+}
+.address:focus::placeholder{
+    opacity: 1;
+}
+
+.address:not(:placeholder-shown) + label,
+.address:focus + label{
+    transform: translate(0, 0) scale(1);
+    cursor: pointer;
+}
