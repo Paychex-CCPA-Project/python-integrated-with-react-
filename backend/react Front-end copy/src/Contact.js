@@ -12,6 +12,11 @@ function CreatContact(contact){
     let data = contactInfo
     console.log(data)
 // ----------------------------------------------------------
+     const requestOptions = {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    }
     return(
         <span className="form-Adderess">
             {/* when the event "e" is change it will call the function to get the data the useState*/}

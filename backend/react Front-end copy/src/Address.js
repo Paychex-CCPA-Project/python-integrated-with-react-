@@ -1,7 +1,8 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import states from "./States";
 import addressInfo from "./addressInfo";
-
+import "./styles/address.css"
+import axios from "axios";
 /// Map functions. File with arrays is addressInfo.js
 //file with states array is states.js
 // returns another state option within the drop selection menu
@@ -10,23 +11,36 @@ function CreateSelect(state){
         <option value={state.id}>{state.name}</option>
     );
 }
-// returns the map for the elements within the address component
-function CreateAddress(ad){
+function CreateAddress(props,ad){
     // the useState will retrieve the data that is put into the input
     // the useState returns 2 variables  the variable that represents the initial state and a function that is used to
     // set the altered state
     const [address1,setAddress1] = useState("")
-    var data = address1
-    console.log(data)
+
+        var data = address1
+        console.log(data)
     // ----------------------------------------------------------
+    //Post the data taken from the users to django in a post request
+    const requestData = ({
+        method: 'POST',
+        body: JSON.stringify(data)
+    })
+    console.log(requestData)
+    axios.post(
+        'https://car-rental-a1b7f-default-rtdb.firebaseio.com/posts.json',
+        requestData,
+    ).then(response => {
+        console.log(response)
+    })
+    // ----------------------------------------------------------
+    // returns the map for the elements within the address component
     return(
         <span className={ad.class}>
             {/* when the event "e" is change it will call the function to get the data the useState*/}
-            <input onChange={ e => setAddress1(e.target.value)} placeholder={ad.name} className={ad.id} type={ad.type} required/>
+            <input onChange={ e => setAddress1(e.target.value)} key={ad.key} className={ad.id} type={ad.type} required/>
             <label>{ad.name}<span style={{color: "red"}}>*</span></label>
         </span>
     );
-
 }
 // ----------------------------------------------------------
 // this function will render the jsx tags
@@ -47,8 +61,6 @@ function Address()  {
             </div>
         );
 }
-
-
 
 export default Address;
 
