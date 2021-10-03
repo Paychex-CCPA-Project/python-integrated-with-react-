@@ -7,23 +7,29 @@ import axios from "axios";
 //file with states array is states.js
 // returns another state option within the drop selection menu
 function CreateSelect(state){
+
     return (
         <option value={state.id}>{state.name}</option>
     );
 }
-function CreateAddress(props,ad){
+function CreateAddress(ad){
     // the useState will retrieve the data that is put into the input
     // the useState returns 2 variables  the variable that represents the initial state and a function that is used to
     // set the altered state
-    const [address1,setAddress1] = useState("")
+    const [address1,setAddress1] = useState({
+        setAddress1: "",
+        setAddress2: "",
+        setCity: "",
+        Zip: ""
+    })
 
         var data = address1
-        console.log(data)
+
     // ----------------------------------------------------------
     //Post the data taken from the users to django in a post request
     const requestData = ({
         method: 'POST',
-        body: JSON.stringify(data)
+        body: JSON.stringify(address1)
     })
     console.log(requestData)
     axios.post(
@@ -37,7 +43,7 @@ function CreateAddress(props,ad){
     return(
         <span className={ad.class}>
             {/* when the event "e" is change it will call the function to get the data the useState*/}
-            <input onChange={ e => setAddress1(e.target.value)} key={ad.key} className={ad.id} type={ad.type} required/>
+            <input onChange={ e => setAddress1(e.target.value)} value={address1.setAddress1} key={ad.key} name="setAddress1" className={ad.id} type={ad.type} required/>
             <label>{ad.name}<span style={{color: "red"}}>*</span></label>
         </span>
     );

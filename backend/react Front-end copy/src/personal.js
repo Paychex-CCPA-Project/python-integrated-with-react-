@@ -15,7 +15,7 @@ function CreatePersonal(pd){
     const [personalInfo, setPersonalInfo] = useState("")
      data = personalInfo
 
-console.log(data)
+
 // ----------------------------------------------------------
      const requestOptions = {
         method: 'POST',

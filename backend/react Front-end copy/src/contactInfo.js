@@ -3,6 +3,7 @@ const contactInfo = [
         key: "CA",
         name: "Phone Number",
         id: "address",
+        setValue: "setPhone"
 
     },
     {
@@ -10,6 +11,7 @@ const contactInfo = [
         key: "CA",
         name: "Email Address",
         id: "address",
+        setValue: "setEmail"
 
     },
 

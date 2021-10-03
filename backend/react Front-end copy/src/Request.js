@@ -17,7 +17,7 @@ function CreateCheck(request){
         )
     }
 
-    console.log(data)
+
     // ----------------------------------------------------------
     return (
         <Row>
