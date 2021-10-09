@@ -1,8 +1,5 @@
 .form-Adderess{
     position: relative;
-    display: flex;
-    flex-flow: column-reverse;
-
 }
 .form-Adderess .address{
     display: inline-block;
@@ -40,11 +37,6 @@
     transform: translate(0, 2.15rem) scale(1.1);
 }
 
-
-::placeholder{
-    opacity: 0;
-    transition: inherit;
-}
 .address:focus::placeholder{
     opacity: 1;
 }

@@ -40,8 +40,12 @@ INSTALLED_APPS = [
 ]
 
 REST_FRAMEWORK = {
+
+    'DATE_INPUT_FORMATS': ["%m-%d-%Y"],
+
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
+
     ),
 }
 

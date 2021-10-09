@@ -23,6 +23,9 @@ table, td {
   margin-bottom: 10px;
 
 }
+tr{
+  width: 100%;
+}
 table td{
   border-radius: 10px;
 }

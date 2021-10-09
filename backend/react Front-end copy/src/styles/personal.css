@@ -20,7 +20,7 @@
     color:grey
 }
 .form-personal input[type=date] {
-    color: transparent;
+    color: black;
 }
 .form-personal .personalData{
     border:none;

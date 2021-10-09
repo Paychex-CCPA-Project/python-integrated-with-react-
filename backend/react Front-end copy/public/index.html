@@ -43,6 +43,13 @@
     <!--
     lode and render captcha. make api call to google with site key.
     -->
+  <script>
+    function onloadCallback() {
+        /* Place your recaptcha rendering code here */
+      var response = grecaptcha.getResponse()
+
+    }
+</script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
             async defer>
