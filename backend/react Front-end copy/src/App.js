@@ -75,7 +75,7 @@ const addContactInfo = async () => {
 
         console.log(Array.from(contactForm))
 
-// makes the POST requeset to the api url using the contact form
+// makes the POST request to the api url using the contact form
             await axios({
                 method: 'post',
                 url: 'http://localhost:8000/api/',
