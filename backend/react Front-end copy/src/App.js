@@ -1,6 +1,5 @@
 import React, {Component,useCallback, useState} from "react";
-import RequestQ from "./RequestQ";
-import Request from "./Request";
+
 import "./styles/App.css"
 import "./styles/personal.css"
 import "./styles/RequestQ.css"
@@ -41,12 +40,17 @@ const [btnValue,setChecked] = useState(true)
     // the useState returns 2 variables  the variable that represents the initial state and a function that is used to
     // set the altered state
 // ----------------------------------------------------------
+    const [dataReport, setReport] = useState(false)
+    const [dataRetrival, setDataRetrival] = useState(false)
+    const [dataPurge, setPurge] = useState(false)
     const [phoneInfo, setPhoneInfo] = useState("")
     const [emailInfo, setEmailInfo] = useState("")
     const [address1,setAddress1] = useState("")
     const [address2, setAddress2] = useState("")
     const [city, setCity] = useState("")
     const [zip, setZip] = useState("")
+    const [radio1, setRadio1] = useState(false)
+    const [radio2, setRadio2] = useState(false)
     const [fName, setFname] = useState("")
     const [mName, setMname] = useState("")
     const [lName, setLname] = useState("")
@@ -61,6 +65,11 @@ const addContactInfo = async () => {
        console.log(btn1)
         let contactForm = new FormData()
 
+    contactForm.append('radio1', radio1)
+    contactForm.append('radio2', radio2)
+      contactForm.append('dataReport', dataReport)
+    contactForm.append('dataPurge', dataPurge)
+    contactForm.append('dataRetrival', dataRetrival)
         contactForm.append('fName', fName)
         contactForm.append('mName', mName)
         contactForm.append('lName', lName)
@@ -103,10 +112,20 @@ const addContactInfo = async () => {
                         </tr>
                         <tr>
                             <td>
-                                <RequestQ/>
-                            </td>
-                        </tr>
-                        <tr>
+                                <Row className="required">
+                            Please select one of the following.
+                        </Row>
+                            <Row>
+                                <input className="radioInput" type="radio" name="radio" onChange={ e => setRadio1(e.target.value)}/>
+                                <label id="radioLabel" htmlFor="radio"> I am making this request on behalf of myself.</label>
+                            </Row>
+                            <Row>
+                                <input className="radioInput" type="radio" name="radio" onChange={ e => setRadio2(e.target.value)}/>
+                                <label id="radioLabel" htmlFor="radio">I am a legally qualified registered agent making this request for another.</label>
+                            </Row>
+                                    </td>
+                                </tr>
+                                <tr>
                  <td className="PersonData">
                      <div>
                          <th>
@@ -205,7 +224,28 @@ const addContactInfo = async () => {
          </tr>
                 <tr>
                     <td>
-                        <Request/>
+                         <th>
+                            Request Type
+                        </th>
+                        {/* */}
+                        <Row className="required">
+                            Please select the reason(s) for this request.
+                        </Row>
+                        <Row>
+                            {/* when the event "e" is change it will call the function to get the data the useState*/}
+                            <input onChange={e => setReport(e.target.checked)} type="CHECKBOX" id="requstCheck" />
+                            <label className="requestLabel" >Personal data report</label>
+                        </Row>
+                         <Row>
+                            {/* when the event "e" is change it will call the function to get the data the useState*/}
+                            <input onChange={e => setDataRetrival(e.target.checked)} type="CHECKBOX" id="requstCheck" />
+                            <label className="requestLabel" >Personal data retrieval</label>
+                        </Row>
+                         <Row>
+                            {/* when the event "e" is change it will call the function to get the data the useState*/}
+                            <input onChange={e => setPurge(e.target.checked)} type="CHECKBOX" id="requstCheck" />
+                            <label className="requestLabel" >Personal data purge</label>
+                        </Row>
                     </td>
                 </tr>
                <tr>

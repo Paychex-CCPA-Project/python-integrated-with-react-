@@ -16,8 +16,18 @@ function CreateCheck(request){
             true
         )
     }
+        const [dataReport, setReport] = useState(false)
+    const [dataRetrival, setDataRetrival] = useState(false)
+    const [dataPurge, setPurge] = useState(false)
 
+  const [radio1, setRadio1] = useState(false)
+    const [radio2, setRadio2] = useState(false)
 
+         contactForm.append('radio1', radio1)
+            contactForm.append('radio2', radio2)
+      contactForm.append('dataReport', dataReport)
+            contactForm.append('dataPurge', dataPurge)
+            contactForm.append('dataRetrival', dataRetrival)
     // ----------------------------------------------------------
     return (
         <Row>
