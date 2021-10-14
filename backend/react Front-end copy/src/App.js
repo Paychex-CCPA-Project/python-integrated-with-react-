@@ -1,5 +1,4 @@
 import React, {Component,useCallback, useState} from "react";
-
 import "./styles/App.css"
 import "./styles/personal.css"
 import "./styles/RequestQ.css"
@@ -36,40 +35,36 @@ const [btnValue,setChecked] = useState(true)
        }
     }
 
-    // the useState will retrieve the data that is put into the input
-    // the useState returns 2 variables  the variable that represents the initial state and a function that is used to
-    // set the altered state
-// ----------------------------------------------------------
-    const [dataReport, setReport] = useState(false)
-    const [dataRetrival, setDataRetrival] = useState(false)
-    const [dataPurge, setPurge] = useState(false)
-    const [phoneInfo, setPhoneInfo] = useState("")
-    const [emailInfo, setEmailInfo] = useState("")
-    const [address1,setAddress1] = useState("")
-    const [address2, setAddress2] = useState("")
-    const [city, setCity] = useState("")
-    const [zip, setZip] = useState("")
-    const [radio1, setRadio1] = useState(false)
-    const [radio2, setRadio2] = useState(false)
-    const [fName, setFname] = useState("")
-    const [mName, setMname] = useState("")
-    const [lName, setLname] = useState("")
-    const [SSN, setSSn] = useState("")
+        // the useState will retrieve the data that is put into the input
+        // the useState returns 2 variables  the variable that represents the initial state and a function that is used to
+        // set the altered state
+    // ----------------------------------------------------------
+        const [dataReport, setReport] = useState(false)
+        const [dataRetrival, setDataRetrival] = useState(false)
+        const [dataPurge, setPurge] = useState(false)
+        const [phoneInfo, setPhoneInfo] = useState("")
+        const [emailInfo, setEmailInfo] = useState("")
+        const [address1,setAddress1] = useState("")
+        const [address2, setAddress2] = useState("")
+        const [city, setCity] = useState("")
+        const [zip, setZip] = useState("")
+        const [radio1, setRadio1] = useState(false)
+        const [radio2, setRadio2] = useState(false)
+        const [fName, setFname] = useState("")
+        const [mName, setMname] = useState("")
+        const [lName, setLname] = useState("")
+        const [SSN, setSSn] = useState("")
 
-// ----------------------------------------------------------
-
-
-
-// ----------------------------------------------------------
+    // ----------------------------------------------------------
 const addContactInfo = async () => {
        console.log(btn1)
         let contactForm = new FormData()
 
-    contactForm.append('radio1', radio1)
-    contactForm.append('radio2', radio2)
-      contactForm.append('dataReport', dataReport)
-    contactForm.append('dataPurge', dataPurge)
-    contactForm.append('dataRetrival', dataRetrival)
+        contactForm.append('radio1', radio1)
+        contactForm.append('radio2', radio2)
+        contactForm.append('dataReport', dataReport)
+        contactForm.append('dataPurge', dataPurge)
+        contactForm.append('dataRetrival', dataRetrival)
         contactForm.append('fName', fName)
         contactForm.append('mName', mName)
         contactForm.append('lName', lName)
@@ -79,12 +74,11 @@ const addContactInfo = async () => {
         contactForm.append('address', address1)
         contactForm.append('address2', address2)
         contactForm.append('city', city)
-
         contactForm.append('zip', zip)
 
         console.log(Array.from(contactForm))
 
-// makes the POST request to the api url using the contact form
+    // makes the POST request to the api url using the contact form
             await axios({
                 method: 'post',
                 url: 'http://localhost:8000/api/',
@@ -95,6 +89,7 @@ const addContactInfo = async () => {
                 })
     }
     // ----------------------------------------------------------
+    // returns JSX to design the HTML form using tags similar to HTML tags
         return (
             <form>
                 <Container fluid>

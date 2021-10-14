@@ -16,6 +16,12 @@ class api(models.Model):
     city = models.CharField(max_length=300, null=True, blank=True)
     zip = models.DecimalField(max_digits=5, decimal_places=0, null=True, blank=True)
     time = models.DateTimeField(auto_now_add=True, blank=True)
+    dataPurge = models.BooleanField(default= False)
+    dataReport = models.BooleanField(default=False)
+    dataRetrival = models.BooleanField(default=False)
+    radio1 = models.BooleanField(default=False)
+    radio2 = models.BooleanField(default=False)
+
 
     def __str__(self):
         return self.emailInfo
