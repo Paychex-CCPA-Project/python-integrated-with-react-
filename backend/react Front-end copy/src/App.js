@@ -39,6 +39,7 @@ const [btnValue,setChecked] = useState(true)
         // the useState returns 2 variables  the variable that represents the initial state and a function that is used to
         // set the altered state
     // ----------------------------------------------------------
+
         const [dataReport, setReport] = useState(false)
         const [dataRetrival, setDataRetrival] = useState(false)
         const [dataPurge, setPurge] = useState(false)
@@ -54,6 +55,7 @@ const [btnValue,setChecked] = useState(true)
         const [mName, setMname] = useState("")
         const [lName, setLname] = useState("")
         const [SSN, setSSn] = useState("")
+
 
     // ----------------------------------------------------------
 const addContactInfo = async () => {

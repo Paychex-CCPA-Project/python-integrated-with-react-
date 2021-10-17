@@ -16,6 +16,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(route.urls)),
     path('', TemplateView.as_view(template_name='index.html')),
+    path('get/',TemplateView.as_view(template_name='index2.html')),
     path('api-token-auth/', views.obtain_auth_token, name='api-token-auth')
 
 ]
