@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'api.apps.ApiConfig',
+    'login.apps.LoginConfig',
     'rest_framework'
+
 ]
 
 REST_FRAMEWORK = {
@@ -67,7 +69,8 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'react Front-end copy/build'),
-            os.path.join(BASE_DIR, 'getrequest/build')
+            os.path.join(BASE_DIR, 'getrequest/build'),
+            os.path.join(BASE_DIR,'login/templates')
         ],
         'APP_DIRS': True,
         'OPTIONS': {

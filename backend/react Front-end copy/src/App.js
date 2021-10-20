@@ -40,15 +40,16 @@ const [btnValue,setChecked] = useState(true)
         // set the altered state
     // ----------------------------------------------------------
 
-        const [dataReport, setReport] = useState(false)
-        const [dataRetrival, setDataRetrival] = useState(false)
-        const [dataPurge, setPurge] = useState(false)
+
         const [phoneInfo, setPhoneInfo] = useState("")
         const [emailInfo, setEmailInfo] = useState("")
         const [address1,setAddress1] = useState("")
         const [address2, setAddress2] = useState("")
         const [city, setCity] = useState("")
         const [zip, setZip] = useState("")
+    const [dataReport, setReport] = useState(false)
+        const [dataRetrival, setDataRetrival] = useState(false)
+        const [dataPurge, setPurge] = useState(false)
         const [radio1, setRadio1] = useState(false)
         const [radio2, setRadio2] = useState(false)
         const [fName, setFname] = useState("")
