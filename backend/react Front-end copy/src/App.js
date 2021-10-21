@@ -94,7 +94,7 @@ const addContactInfo = async () => {
     // ----------------------------------------------------------
     // returns JSX to design the HTML form using tags similar to HTML tags
         return (
-            <form>
+            <form onSubmit={addContactInfo}>
                 <Container fluid>
 
                     {/*creates the table for the form app*/}
@@ -260,7 +260,7 @@ const addContactInfo = async () => {
                                    <li><input type="checkbox" required/></li>
                                    <li>I certify this data is accurate under penalty of perjury<span
                                        style={{color: "red"}}>*</span></li>
-                                   <li><button disabled={btnValue} className="btn2" onClick={addContactInfo}>Submit</button></li>
+                                   <li><input disabled={btnValue} className="btn2" value="Submit" type="submit"/></li>
                                </ul>
                            </nav>
                        </header>
