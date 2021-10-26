@@ -34,6 +34,10 @@
     border-radius: 5px;
     transform: scale(1.2);
 }
+  .nav_links li button:disabled{
+    background-color: #1616b7;
+}
+
  .nav_links li button:hover{
     background-color: #1616b7;
 }

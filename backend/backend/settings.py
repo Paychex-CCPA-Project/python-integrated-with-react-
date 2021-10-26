@@ -48,6 +48,7 @@ REST_FRAMEWORK = {
 
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication'
 
     ),
 }
@@ -132,6 +133,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-os.path.join(BASE_DIR, 'react Front-end copy/build/static'),
-os.path.join(BASE_DIR, 'getrequest/build/static')
+    os.path.join(BASE_DIR, 'react Front-end copy/build/static'),
+    os.path.join(BASE_DIR, 'getrequest/build/static')
+
 ]

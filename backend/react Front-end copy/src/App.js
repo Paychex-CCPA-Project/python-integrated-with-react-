@@ -1,4 +1,4 @@
-import React, {Component,useCallback, useState} from "react";
+import React, {useState} from "react";
 import "./styles/App.css"
 import "./styles/personal.css"
 import "./styles/RequestQ.css"
@@ -6,7 +6,6 @@ import "./styles/address.css"
 import "./styles/capthcaNav.css"
 import { Container, Row } from 'reactstrap';
 import states from "./States";
-import {useHistory} from "react-router";
 import ReCAPTCHA from "react-google-recaptcha";
 import axios from "axios";
 
@@ -24,6 +23,9 @@ const App = () => {
 const [btnValue,setChecked] = useState(true)
 
 
+
+    // ----------------------------------------------------------
+    // disables the submit button until the capactcha returns a value
     function setDis(value){
       btn1 = value
        if(btn1.length != 0){
@@ -34,20 +36,20 @@ const [btnValue,setChecked] = useState(true)
 
        }
     }
+    let contactForm = new FormData()
+    let contactForm2 = new FormData()
 
-        // the useState will retrieve the data that is put into the input
-        // the useState returns 2 variables  the variable that represents the initial state and a function that is used to
-        // set the altered state
+    // the useState will retrieve the data that is put into the input
+    // the useState returns 2 functions  the functions that represents the initial state and a function that is used to
+    // set the altered state
     // ----------------------------------------------------------
-
-
         const [phoneInfo, setPhoneInfo] = useState("")
         const [emailInfo, setEmailInfo] = useState("")
         const [address1,setAddress1] = useState("")
         const [address2, setAddress2] = useState("")
         const [city, setCity] = useState("")
         const [zip, setZip] = useState("")
-    const [dataReport, setReport] = useState(false)
+        const [dataReport, setReport] = useState(false)
         const [dataRetrival, setDataRetrival] = useState(false)
         const [dataPurge, setPurge] = useState(false)
         const [radio1, setRadio1] = useState(false)
@@ -56,18 +58,9 @@ const [btnValue,setChecked] = useState(true)
         const [mName, setMname] = useState("")
         const [lName, setLname] = useState("")
         const [SSN, setSSn] = useState("")
-
-
     // ----------------------------------------------------------
-const addContactInfo = async () => {
-       console.log(btn1)
-        let contactForm = new FormData()
+    function formCreate(contactForm){
 
-        contactForm.append('radio1', radio1)
-        contactForm.append('radio2', radio2)
-        contactForm.append('dataReport', dataReport)
-        contactForm.append('dataPurge', dataPurge)
-        contactForm.append('dataRetrival', dataRetrival)
         contactForm.append('fName', fName)
         contactForm.append('mName', mName)
         contactForm.append('lName', lName)
@@ -79,22 +72,55 @@ const addContactInfo = async () => {
         contactForm.append('city', city)
         contactForm.append('zip', zip)
 
-        console.log(Array.from(contactForm))
+        return contactForm
+    }
+    function formCreate2(contactForm2){
+        contactForm2.append('radio1', radio1)
+        contactForm2.append('radio2', radio2)
+        contactForm2.append('dataReport', dataReport)
+        contactForm2.append('dataPurge', dataPurge)
+        contactForm2.append('dataRetrival', dataRetrival)
 
-    // makes the POST request to the api url using the contact form
-            await axios({
-                method: 'post',
-                url: 'http://localhost:8000/api/',
-                data: contactForm
+        return contactForm2
+    }
+
+const addContactInfo = (e) => {
+    e.preventDefault()
+    console.log(btn1)
+    formCreate(contactForm)
+    formCreate2(contactForm2)
+    post2()
+
+    // makes the POST request to the api url using the contact for
+    async function post2(){
+         await axios({
+            method: 'post',
+            url: 'http://localhost:8000/api/contact/',
+            data: contactForm
+        })
+            .then((response) => {
+                console.log(response)
+                alert("Your request was submitted")
+
             })
-                .then((response) => {
-                    console.log(response)
-                })
+    }
+    async function post(){
+         await axios({
+            method: 'post',
+            url: 'http://localhost:8000/api/data/',
+            data: contactForm2
+        })
+            .then((response) => {
+                console.log(response)
+                alert("Your request was submitted")
+
+            })
+    }
     }
     // ----------------------------------------------------------
     // returns JSX to design the HTML form using tags similar to HTML tags
         return (
-            <form onSubmit={addContactInfo}>
+            <form>
                 <Container fluid>
 
                     {/*creates the table for the form app*/}
@@ -260,7 +286,7 @@ const addContactInfo = async () => {
                                    <li><input type="checkbox" required/></li>
                                    <li>I certify this data is accurate under penalty of perjury<span
                                        style={{color: "red"}}>*</span></li>
-                                   <li><input disabled={btnValue} className="btn2" value="Submit" type="submit"/></li>
+                                   <li><button disabled={btnValue} className="btn2"  onClick={addContactInfo}>Submit</button></li>
                                </ul>
                            </nav>
                        </header>

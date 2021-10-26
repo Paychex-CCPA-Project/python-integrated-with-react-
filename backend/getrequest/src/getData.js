@@ -25,7 +25,9 @@ function GetData(){
       <input type="number" onChange={e => SetNumber(parseInt(e.target.value))}/>
         {/* when the button is clicked it will run the getnum function */}
       <button onClick={getnum}>Submit</button>
-        <ul>
+        <ul>{
+            
+        }
         </ul>
     </div>
   );
