@@ -5,7 +5,7 @@ function NameList(props){
     return(
         <List {...props}>
             <Datagrid>
-                <TextField source='fName' />
+                <TextField source='id' />
             </Datagrid>
         </List>
 

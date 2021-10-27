@@ -5,7 +5,7 @@ from django.db import models
 # Create your models here.
 # creates the first models that includes the initial subject fields
 # these are the fields that are going to be in the database
-class api(models.Model):
+class Contact(models.Model):
     fName = models.CharField(max_length=300, null=False, blank=False, default='First name not given')
     mName = models.CharField(max_length=300, null=False, blank=False, default='Middle name not given')
     lName = models.CharField(max_length=300, null=False, blank=False, default='Last name not given')
@@ -20,13 +20,13 @@ class api(models.Model):
 
 
     # returns a unique id to associate with the second model
-    def __int__(self):
-        return self.phoneInfo
+    def __str__(self):
+        return self.emailInfo
 
 
 # the second model that will contain what action should be taken on the data
 class DataMethod(models.Model):
-    request = models.ForeignKey(api, related_name='contact', on_delete=models.CASCADE, null=False)
+    request = models.ForeignKey(Contact, related_name='DataMethod', on_delete=models.CASCADE, null=True)
     dataPurge = models.BooleanField(default=False)
     dataReport = models.BooleanField(default=False)
     dataRetrival = models.BooleanField(default=False)

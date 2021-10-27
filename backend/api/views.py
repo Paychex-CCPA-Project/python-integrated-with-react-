@@ -7,12 +7,11 @@ from rest_framework import viewsets
 
 # Create your views here.
 class ApiViews(viewsets.ModelViewSet):
-    personal = api.objects.all()
+    queryset = Contact.objects.all()
     serializer_class = ApiSerializers
-    queryset = personal
+
 
 class DataViews(viewsets.ModelViewSet):
-    data = DataMethod.objects.all()
+    queryset = DataMethod.objects.all()
     serializer_class = DataMethodSerializers
-    queryset = data
 

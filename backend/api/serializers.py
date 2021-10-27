@@ -5,7 +5,7 @@ from .models import *
 
 class ApiSerializers(serializers.ModelSerializer):
     class Meta:
-        model = api
+        model = Contact
         fields = '__all__'
 
 

@@ -21,14 +21,14 @@ const App = () => {
     var btn1
 
 const [btnValue,setChecked] = useState(true)
-
+const [certify, setCertify] = useState(false)
 
 
     // ----------------------------------------------------------
     // disables the submit button until the capactcha returns a value
     function setDis(value){
       btn1 = value
-       if(btn1.length != 0){
+       if(btn1.length != 0 ){
            setChecked(false)
        }else if(btn1.length === 0){
            alert("Please confirm you are a human")
@@ -58,6 +58,7 @@ const [btnValue,setChecked] = useState(true)
         const [mName, setMname] = useState("")
         const [lName, setLname] = useState("")
         const [SSN, setSSn] = useState("")
+
     // ----------------------------------------------------------
     function formCreate(contactForm){
 
@@ -71,6 +72,7 @@ const [btnValue,setChecked] = useState(true)
         contactForm.append('address2', address2)
         contactForm.append('city', city)
         contactForm.append('zip', zip)
+        contactForm.append('ceritfy', certify)
 
         return contactForm
     }
@@ -101,7 +103,7 @@ const addContactInfo = (e) => {
             .then((response) => {
                 console.log(response)
                 alert("Your request was submitted")
-
+                document.getElementById("create-course-form").reset();
             })
     }
     async function post(){
@@ -120,7 +122,7 @@ const addContactInfo = (e) => {
     // ----------------------------------------------------------
     // returns JSX to design the HTML form using tags similar to HTML tags
         return (
-            <form>
+            <form id="create-course-form">
                 <Container fluid>
 
                     {/*creates the table for the form app*/}
@@ -283,7 +285,7 @@ const addContactInfo = (e) => {
                            </div>
                            <nav>
                                <ul className="nav_links">
-                                   <li><input type="checkbox" required/></li>
+                                   <li><input type="checkbox" onChange={e => setCertify(e.target.checked)}   required/></li>
                                    <li>I certify this data is accurate under penalty of perjury<span
                                        style={{color: "red"}}>*</span></li>
                                    <li><button disabled={btnValue} className="btn2"  onClick={addContactInfo}>Submit</button></li>
