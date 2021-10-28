@@ -9,7 +9,7 @@ from rest_framework.authtoken import views
 from rest_framework import routers
 
 route = routers.DefaultRouter()
-route.register("contact", ApiViews)
+route.register("contact", ApiViews, basename='Contact')
 route.register("data", DataViews)
 
 

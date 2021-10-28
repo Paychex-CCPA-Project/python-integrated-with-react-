@@ -20,6 +20,7 @@ function CreateSelect(state){
 const App = () => {
     var btn1
 
+
 const [btnValue,setChecked] = useState(true)
 const [certify, setCertify] = useState(false)
 
@@ -28,7 +29,9 @@ const [certify, setCertify] = useState(false)
     // disables the submit button until the capactcha returns a value
     function setDis(value){
       btn1 = value
-       if(btn1.length != 0 ){
+
+
+       if(btn1.length != 0){
            setChecked(false)
        }else if(btn1.length === 0){
            alert("Please confirm you are a human")
