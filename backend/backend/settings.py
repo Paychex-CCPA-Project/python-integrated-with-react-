@@ -69,7 +69,6 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'react Front-end copy/build'),
-            os.path.join(BASE_DIR, 'getrequest/build'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -133,7 +132,4 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'react Front-end copy/build/static'),
-    os.path.join(BASE_DIR, 'getrequest/build/static'),
-
-
 ]

@@ -18,12 +18,39 @@ function CreateSelect(state){
 
 
 const App = () => {
+    // ----------------------------------------------------------
     var btn1
+    const [btnValue,setChecked] = useState(true)
+    const [certify, setCertify] = useState(false)
+    const [sub, setSub] = useState(false)
+    const [address1,setAddress1] = useState("")
+        const [dataMethods, setDataMethods] = useState({
+            radio1: false,
+            radio2: false,
+            dataReport: false,
+            dataPurge: false,
+            dataRetrival: false
+        })
+ const [contact, setContact] = useState({
+        fName: "",
+        lName: "",
+        mName: "",
+        emailInfo: "",
+        phoneInfo: "",
+        city: "",
+        SSN: "",
+        zip: "",
+        address1: "",
+        address2: "",
+        dataMethods: {
+            radio1: dataMethods.radio1,
+            radio2: dataMethods.radio2,
+            dataReport: dataMethods.dataReport,
+            dataRetrival: dataMethods.dataRetrival,
+            dataMethods: dataMethods.dataPurge
+        }
+    })
 
-
-const [btnValue,setChecked] = useState(true)
-const [certify, setCertify] = useState(false)
-const [sub, setSub] = useState(false)
 
     // ----------------------------------------------------------
     // disables the submit button until the capactcha returns a value
@@ -44,36 +71,6 @@ const [sub, setSub] = useState(false)
     // the useState returns 2 functions  the functions that represents the initial state and a function that is used to
     // set the altered state
     // ----------------------------------------------------------
-        const [address1,setAddress1] = useState("")
-        const [dataMethods, setDataMethods] = useState({
-            radio1: false,
-            radio2: false,
-            dataReport: false,
-            dataPurge: false,
-            dataRetrival: false
-        })
-
-    // ----------------------------------------------------------
-
- const [contact, setContact] = useState({
-        fName: "",
-        lName: "",
-        mName: "",
-        emailInfo: "",
-        phoneInfo: "",
-        city: "",
-        SSN: "",
-        zip: "",
-        address1: "",
-        address2: "",
-        dataMethods: {
-            radio1: dataMethods.radio1,
-            radio2: dataMethods.radio2,
-            dataReport: dataMethods.dataReport,
-            dataRetrival: dataMethods.dataRetrival,
-            dataMethods: dataMethods.dataPurge
-        }
-    })
 
 const AddContactInfo = async (e) => {
     e.preventDefault()
@@ -119,14 +116,16 @@ const AddContactInfo = async (e) => {
     // returns JSX to design the HTML form using tags similar to HTML tags
         return (
             <form id="create-course-form">
+                {/* the ternary that will show the success */}
                 {
-                    {/* the ternary that will show the success */}
+                    // the sub will set to true once the submission is successful
                     (sub) ? (
                         <Container>
                         <table>
                             <tr>
                                 <td>
-                                    <Success />
+                                    {/* will lead to the success.js file upon successful completion of submit*/}
+                                    <Success fName={contact.fName} lName={contact.lName} />
                                 </td>
                             </tr>
                         </table>
