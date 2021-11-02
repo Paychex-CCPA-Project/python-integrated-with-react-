@@ -7,10 +7,10 @@ import "./styles/capthcaNav.css"
 import { Container, Row } from 'reactstrap';
 import states from "./States";
 import ReCAPTCHA from "react-google-recaptcha";
+import Success from "./Success";
 import axios from "axios";
 
 function CreateSelect(state){
-
     return (
         <option value={state.id}>{state.name}</option>
     );
@@ -23,7 +23,7 @@ const App = () => {
 
 const [btnValue,setChecked] = useState(true)
 const [certify, setCertify] = useState(false)
-
+const [sub, setSub] = useState(false)
 
     // ----------------------------------------------------------
     // disables the submit button until the capactcha returns a value
@@ -101,17 +101,16 @@ const AddContactInfo = async (e) => {
   console.log(userData)
 
 
-
     // makes the POST request to the api url using the contact for
          await axios({
             method: 'post',
             url: 'http://localhost:8000/api/contact/',
-            data:userData
+            data: userData
         })
             .then((response) => {
                 console.log(response)
-                alert("Your request was submitted")
                 document.getElementById("create-course-form").reset();
+                setSub(true)
             })
              .catch(err =>{alert("This form was not posted. " + err)})
     }
@@ -120,6 +119,19 @@ const AddContactInfo = async (e) => {
     // returns JSX to design the HTML form using tags similar to HTML tags
         return (
             <form id="create-course-form">
+                {
+                    {/* the ternary that will show the success */}
+                    (sub) ? (
+                        <Container>
+                        <table>
+                            <tr>
+                                <td>
+                                    <Success />
+                                </td>
+                            </tr>
+                        </table>
+                    </Container>) : (
+
                 <Container fluid>
 
                     {/*creates the table for the form app*/}
@@ -292,7 +304,8 @@ const AddContactInfo = async (e) => {
                    </td>
                </tr>
                     </table>
-                </Container>
+                </Container>)
+                    }
             </form>
         );
     }

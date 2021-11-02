@@ -29,7 +29,8 @@ class Contact(models.Model):
 
     # returns a unique id to associate with the second model
     def __str__(self):
-        return self.emailInfo
+        template = '{0.lName} {0.fName} {0.emailInfo}'
+        return template.format(self)
 
 
 
