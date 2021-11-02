@@ -13,22 +13,19 @@ class DataMethod(models.Model):
     radio1 = models.BooleanField(default=False)
     radio2 = models.BooleanField(default=False)
 
-    def __bool__(self):
-        return self.radio1
-
 class Contact(models.Model):
-    fName = models.CharField(max_length=300, null=False, blank=False, default='First name not given')
-    mName = models.CharField(max_length=300, null=False, blank=False, default='Middle name not given')
-    lName = models.CharField(max_length=300, null=False, blank=False, default='Last name not given')
-    SSN = models.DecimalField(max_digits=4, decimal_places=0, null=False, default=0000)
-    phoneInfo = models.DecimalField(max_digits=10, decimal_places=0, null=False, blank=False, default=0)
-    emailInfo = models.EmailField(max_length=100, null=False, blank=False, default='No email provided')
-    address = models.CharField(max_length=300, null=False, blank=False, default="no address")
+    fName = models.CharField(max_length=300, null=True, blank=True, default='First name not given')
+    mName = models.CharField(max_length=300, null=True, blank=True, default='Middle name not given')
+    lName = models.CharField(max_length=300, null=True, blank=True, default='Last name not given')
+    SSN = models.DecimalField(max_digits=4, decimal_places=0, null=True, default=0000)
+    phoneInfo = models.DecimalField(max_digits=10, decimal_places=0, null=True, blank=True, default=0)
+    emailInfo = models.EmailField(max_length=100, null=True, blank=True, default='No email provided')
+    address = models.CharField(max_length=300, null=True, blank=True, default="no address")
     address2 = models.CharField(max_length=300, null=True, blank=True)
-    city = models.CharField(max_length=300, null=False, blank=False, default="no city")
-    zip = models.DecimalField(max_digits=5, decimal_places=0, null=True, blank=True, default="no zip")
-    time = models.DateTimeField(auto_now_add=True, blank=False)
-    dataMethods = models.ForeignKey(DataMethod,  on_delete=models.CASCADE, null=True, blank=True)
+    city = models.CharField(max_length=300, null=True, blank=True, default="no city")
+    zip = models.DecimalField(max_digits=5, decimal_places=0, null=True, blank=True, default=0.0)
+    time = models.DateTimeField(auto_now_add=True, blank=True)
+    dataMeothds = models.ForeignKey(DataMethod, on_delete=models.CASCADE, null=True)
 
     # returns a unique id to associate with the second model
     def __str__(self):

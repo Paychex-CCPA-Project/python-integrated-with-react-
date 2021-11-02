@@ -11,7 +11,7 @@ function GetData(){
   function getnum(){
       // url will get the data from the database just like the url is used to post
       // getNumber will change the number in the url ex. http://localhost:8000/api/2/
-    axios.get('http://localhost:8000/api/' + getNumber + "/")
+    axios.get('http://localhost:8000/api/contact/' + getNumber + "/")
         // will print the response from the url get request
         .then((response) => {
             console.log(response)

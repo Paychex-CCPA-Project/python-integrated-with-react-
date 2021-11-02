@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from drf_writable_nested import WritableNestedModelSerializer
+import drf_rw_serializers
 from .models import *
 
 
@@ -8,11 +9,15 @@ class DataMethodSerializers(serializers.ModelSerializer):
         model = DataMethod
         fields = '__all__'
 
-class ApiSerializers(WritableNestedModelSerializer,serializers.ModelSerializer):
-    dataMethods = DataMethodSerializers()
+
+
+class ApiSerializers(WritableNestedModelSerializer, serializers.ModelSerializer):
+    dataMeothds = DataMethodSerializers()
     class Meta:
         model = Contact
         fields = '__all__'
 
 
+
+    
 

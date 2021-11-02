@@ -17,7 +17,7 @@ function App() {
         {username: "", password: ""}
     )
 
-    const login = detail =>{
+    const login = detail => {
         console.log(detail)
 
         if(detail.username === Admin.username && detail.password === Admin.password){
