@@ -12,7 +12,7 @@ class DataMethodSerializers(serializers.ModelSerializer):
 
 
 class ApiSerializers(WritableNestedModelSerializer, serializers.ModelSerializer):
-    dataMeothds = DataMethodSerializers()
+    dataMeothds = DataMethodSerializers(required=True)
     class Meta:
         model = Contact
         fields = '__all__'

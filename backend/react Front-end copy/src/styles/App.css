@@ -9,9 +9,6 @@ table{
 }
 
 table, td {
-  border-radius: 20px;
-  border-style: solid;
-  border-color: lightgray;
   border-width: 0.001em;
   border-spacing: 15px;
   border-collapse: collapse;
@@ -25,6 +22,7 @@ table, td {
 }
 tr{
   width: 100%;
+  border-bottom: 1px solid lightgray;
 }
 table td{
   border-radius: 10px;

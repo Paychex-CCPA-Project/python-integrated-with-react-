@@ -16,8 +16,10 @@ function CreateSelect(state){
     );
 }
 
-
 const App = () => {
+       // the useState will retrieve the data that is put into the input
+      // the useState returns 2 functions  the functions that represents the initial state and a function that is used to
+     // set the altered state
     // ----------------------------------------------------------
     var btn1
     const [btnValue,setChecked] = useState(true)
@@ -31,34 +33,34 @@ const App = () => {
             dataPurge: false,
             dataRetrival: false
         })
- const [contact, setContact] = useState({
-        fName: "",
-        lName: "",
-        mName: "",
-        emailInfo: "",
-        phoneInfo: "",
-        city: "",
-        SSN: "",
-        zip: "",
-        address1: "",
-        address2: "",
-        dataMethods: {
-            radio1: dataMethods.radio1,
-            radio2: dataMethods.radio2,
-            dataReport: dataMethods.dataReport,
-            dataRetrival: dataMethods.dataRetrival,
-            dataMethods: dataMethods.dataPurge
-        }
-    })
+     const [contact, setContact] = useState({
+            fName: "",
+            lName: "",
+            mName: "",
+            emailInfo: "",
+            phoneInfo: "",
+            city: "",
+            SSN: "",
+            zip: "",
+            address1: "",
+            address2: "",
+            dataMethods: {
+                radio1: dataMethods.radio1,
+                radio2: dataMethods.radio2,
+                dataReport: dataMethods.dataReport,
+                dataRetrival: dataMethods.dataRetrival,
+                dataMethods: dataMethods.dataPurge
+            }
+        })
+    console.log(certify)
+     // ----------------------------------------------------------
+    // disables the submit button until the captcha returns a value
 
-
-    // ----------------------------------------------------------
-    // disables the submit button until the capactcha returns a value
-    function setDis(value){
-      btn1 = value
-
-
-       if(btn1.length != 0){
+    const setDis = async (value) =>{
+      var btn = value
+        btn1 = btn
+        console.log(btn)
+       if(btn1.length != 0 && certify){
            setChecked(false)
        }else if(btn1.length === 0){
            alert("Please confirm you are a human")
@@ -66,10 +68,6 @@ const App = () => {
 
        }
     }
-
-    // the useState will retrieve the data that is put into the input
-    // the useState returns 2 functions  the functions that represents the initial state and a function that is used to
-    // set the altered state
     // ----------------------------------------------------------
 
 const AddContactInfo = async (e) => {
@@ -84,7 +82,7 @@ const AddContactInfo = async (e) => {
   }
   const userData = {
         dataMeothds,
-      fName: contact.fName,
+        fName: contact.fName,
         lName: contact.lName,
         mName: contact.mName,
         emailInfo: contact.emailInfo,
@@ -92,12 +90,9 @@ const AddContactInfo = async (e) => {
         city: contact.city,
         SSN: contact.SSN,
         zip: contact.zip,
-        address1: contact.address1,
+        address: contact.address1,
         address2: contact.address2
   }
-  console.log(userData)
-
-
     // makes the POST request to the api url using the contact for
          await axios({
             method: 'post',
@@ -112,7 +107,7 @@ const AddContactInfo = async (e) => {
              .catch(err =>{alert("This form was not posted. " + err)})
     }
 
-    // ----------------------------------------------------------
+     // ----------------------------------------------------------
     // returns JSX to design the HTML form using tags similar to HTML tags
         return (
             <form id="create-course-form">
