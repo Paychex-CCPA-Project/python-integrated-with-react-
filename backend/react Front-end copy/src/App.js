@@ -22,6 +22,8 @@ const App = () => {
      // set the altered state
     // ----------------------------------------------------------
     var btn1
+    let error = []
+    let errorId = []
     const [btnValue,setChecked] = useState(true)
     const [certify, setCertify] = useState(false)
     const [sub, setSub] = useState(false)
@@ -60,7 +62,7 @@ const App = () => {
       var btn = value
         btn1 = btn
         console.log(btn)
-       if(btn1.length != 0 && certify){
+       if(btn1.length != 0){
            setChecked(false)
        }else if(btn1.length === 0){
            alert("Please confirm you are a human")
@@ -68,33 +70,115 @@ const App = () => {
 
        }
     }
+      // ----------------------------------------------------------
+     // this function will check if the input fields are empty
+    // if the inputs are empty the validForm variable will change to false not allowing the form to post
+    const validateForm =() =>{
+        let validForm = true
+        var checkBox = document.getElementsByName("check1")
+
+        if(contact.fName === ""){
+            validForm = false
+            error.push("First Name is not filled in")
+            let FNAME =  document.getElementById("FNAME")
+            FNAME.id = "validateInput"
+        }
+        if(contact.mName === ""){
+            validForm = false
+            error.push( "Middle Name is not filled in")
+             let MNAME =  document.getElementById("MNAME")
+            MNAME.id = "validateInput"
+        }
+        if(contact.lName === ""){
+            validForm = false
+            error.push( "Last Name is not filled in")
+            let LNAME =  document.getElementById("LNAME")
+            LNAME.id = "validateInput"
+        }
+        if(contact.address1 === ""){
+            validForm = false
+            error.push("Address is not filled in")
+            let ad1 =  document.getElementById("ad1")
+            ad1.id = "validateInput"
+        }
+        if(contact.emailInfo === ""){
+            validForm = false
+            error.push("Email address is not filled in")
+            let email =  document.getElementById("EMAIL")
+            email.id = "validateInput"
+        }
+        if(contact.phoneInfo === "" ){
+            validForm = false
+            error.push("Phone Number is not filled in")
+            let phone =  document.getElementById("PHONE1")
+            phone.id = "validateInput"
+        }
+        if(contact.zip === ""){
+            validForm = false
+            error.push("Zip code is not filled in")
+            let zip =  document.getElementById("ZIP")
+            zip.id = "validateInput"
+        }
+        if(contact.SSN === ""){
+            validForm = false
+            error.push("SSN is not filled in")
+            let SSN =  document.getElementById("SSN")
+            SSN.id = "validateInput"
+        }
+        if(contact.city === ""){
+            validForm = false
+            error.push("City is not filled in")
+            let city =  document.getElementById("CITY")
+            city.id = "validateInput"
+        }
+        var okay = false
+        for(var i = 0; i < checkBox.length; i++)
+    {
+        if(checkBox[i].checked)
+        {
+            okay = true
+            break;
+        }
+    }
+        if(!okay){
+            error.push("at least 1 check box needs to be checked")
+            checkBox.id = "validateInput"
+            validForm = false
+        }
+
+        return validForm
+    }
     // ----------------------------------------------------------
-
+   // async function that post the collected user data or prints error messages to the screen
 const AddContactInfo = async (e) => {
+        // prevents the form from falling into default
     e.preventDefault()
-  let dataMeothds = {
-        radio1: dataMethods.radio1,
-      radio2: dataMethods.radio2,
-      dataReport: dataMethods.dataReport,
-      dataRetrival: dataMethods.dataRetrival,
-      dataMethods: dataMethods.dataPurge
 
-  }
-  const userData = {
-        dataMeothds,
-        fName: contact.fName,
-        lName: contact.lName,
-        mName: contact.mName,
-        emailInfo: contact.emailInfo,
-        phoneInfo: contact.phoneInfo,
-        city: contact.city,
-        SSN: contact.SSN,
-        zip: contact.zip,
-        address: contact.address1,
-        address2: contact.address2
-  }
-    // makes the POST request to the api url using the contact for
-         await axios({
+    // will post if the validate form function returns true
+    if(validateForm()) {
+        let dataMeothds = {
+            radio1: dataMethods.radio1,
+            radio2: dataMethods.radio2,
+            dataReport: dataMethods.dataReport,
+            dataRetrival: dataMethods.dataRetrival,
+            dataMethods: dataMethods.dataPurge
+
+        }
+        const userData = {
+            dataMeothds,
+            fName: contact.fName,
+            lName: contact.lName,
+            mName: contact.mName,
+            emailInfo: contact.emailInfo,
+            phoneInfo: contact.phoneInfo,
+            city: contact.city,
+            SSN: contact.SSN,
+            zip: contact.zip,
+            address: contact.address1,
+            address2: contact.address2
+        }
+        // makes the POST request to the api url using the contact for
+        await axios({
             method: 'post',
             url: 'http://localhost:8000/api/contact/',
             data: userData
@@ -102,15 +186,31 @@ const AddContactInfo = async (e) => {
             .then((response) => {
                 console.log(response)
                 document.getElementById("create-course-form").reset();
+                // sets the true if the submit works. function will cause the successful submission page to render
                 setSub(true)
             })
-             .catch(err =>{alert("This form was not posted. " + err)})
+            .catch(err => {
+                if(err.response){
+                    console.log(err.response)
+                }else if(err.request){
+                    alert(err.request)
+                }else{
+                    alert('error: ' + err)
+                }
+            })
+    }
+    else{
+        // will print out all error messages that will tell users what they have not filled out
+       alert(Array.from(error))
+
+
+    }
     }
 
      // ----------------------------------------------------------
     // returns JSX to design the HTML form using tags similar to HTML tags
         return (
-            <form id="create-course-form">
+            <form id="create-course-form" novalidate="" autocomplete="off" class="form">
                 {/* the ternary that will show the success */}
                 {
                     // the sub will set to true once the submission is successful
@@ -126,8 +226,9 @@ const AddContactInfo = async (e) => {
                         </table>
                     </Container>) : (
 
-                <Container fluid>
 
+                <Container fluid>
+                   
                     {/*creates the table for the form app*/}
                     <table>
                         <tr>
@@ -156,6 +257,7 @@ const AddContactInfo = async (e) => {
                                 </tr>
                                 <tr>
                  <td className="PersonData">
+
                      <div>
                          <th>
                             <Row>
@@ -165,28 +267,26 @@ const AddContactInfo = async (e) => {
                          {/* this is where the map function is called and will render the elements */}
                          <span className="form-personal">
                             {/* when the event "e" is change it will call the function to get the data the useState*/}
-                            <input onChange={ e => setContact({...contact, fName: e.target.value})} className="personal" type="text" placeholder="First Name" required/>
+                            <input onChange={ e => setContact({...contact, fName: e.target.value})} className="personal" id="FNAME" type="text" placeholder="First Name" required/>
                             {/*<label>{pd.name}<span style={{color: "red"}}>*</span></label>*/}
                         </span>
                           <span className="form-personal">
                             {/* when the event "e" is change it will call the function to get the data the useState*/}
-                            <input onChange={ e => setContact({...contact, mName: e.target.value})} className="personal" type="text" placeholder="Middle Name" required/>
+                            <input onChange={ e => setContact({...contact, mName: e.target.value})} className="personal" type="text" id="MNAME"  placeholder="Middle Name" required/>
                             {/*<label>{pd.name}<span style={{color: "red"}}>*</span></label>*/}
                         </span>
                           <span className="form-personal">
                             {/* when the event "e" is change it will call the function to get the data the useState*/}
-                            <input onChange={ e => setContact({...contact, lName: e.target.value})} className="personal" type="text" placeholder="Last Name" required/>
-                            {/*<label>{pd.name}<span style={{color: "red"}}>*</span></label>*/}
+                            <input onChange={ e => setContact({...contact, lName: e.target.value})} className="personal" type="text" id="LNAME" placeholder="Last Name" required/>
                         </span>
                           <span className="form-personal">
                             {/* when the event "e" is change it will call the function to get the data the useState*/}
                             <input  className="personal" type="date" placeholder="Date Of Birth" required/>
-                            {/*<label>{pd.name}<span style={{color: "red"}}>*</span></label>*/}
                         </span>
                           <span className="form-personal">
+                              {/*SSN*/}
                             {/* when the event "e" is change it will call the function to get the data the useState*/}
-                            <input onChange={ e => setContact({...contact, SSN: e.target.value})} className="personalData" type="text" placeholder="Last Four Digits of SSN" required/>
-                            {/*<label>{pd.name}<span style={{color: "red"}}>*</span></label>*/}
+                            <input onChange={ e => setContact({...contact, SSN: e.target.value})} className="personalData" type="text" id="SSN" placeholder="Last Four Digits of SSN" maxLength="4" required/>
                         </span>
                      </div>
                  </td>
@@ -199,22 +299,22 @@ const AddContactInfo = async (e) => {
                       </th>
                          <span className="form-Adderess">
                             {/* when the event "e" is change it will call the function to get the data the useState*/}
-                            <input onChange={ e => setContact({...contact, address1: e.target.value})} value={address1.setAddress1} placeholder="Address One"  name="setAddress1" className="address" type="text" required/>
+                            <input onChange={ e => setContact({...contact, address1: e.target.value})} value={address1.setAddress1} placeholder="Address One" id="ad1"  name="setAddress1" className="address" type="text" required/>
                              {/*<label>Address<span style={{color: "red"}}>*</span></label>*/}
                         </span>
                      <span className="form-Adderess">
                             {/* when the event "e" is change it will call the function to get the data the useState*/}
-                            <input onChange={ e => setContact({...contact, address2: e.target.value})} name="setAddress1" placeholder="Address Two" className="address" type="text" />
+                            <input onChange={ e => setContact({...contact, address2: e.target.value})} name="setAddress1" placeholder="Address Two"  className="address" type="text" />
                          {/*<label>Address two<span style={{color: "red"}}>*</span></label>*/}
                         </span>
                      <span className="form-City">
                             {/* when the event "e" is change it will call the function to get the data the useState*/}
-                            <input onChange={ e => setContact({...contact, city: e.target.value})} name="setAddress1" placeholder="City" className="city" type="text" required/>
+                            <input onChange={ e => setContact({...contact, city: e.target.value})} name="setAddress1" placeholder="City" className="city" id="CITY" type="text" required/>
                          {/*<label>City<span style={{color: "red"}}>*</span></label>*/}
                         </span>
                      <span className="form-City">
                             {/* when the event "e" is change it will call the function to get the data the useState*/}
-                            <input onChange={ e => setContact({...contact, zip: e.target.value})} name="setAddress1" placeholder="Zip" className="city" type="text" required/>
+                            <input onChange={ e => setContact({...contact, zip: e.target.value})} name="setAddress1" placeholder="Zip" className="city" id="ZIP" type="text" required/>
                          {/*<label>Zip<span style={{color: "red"}}>*</span></label>*/}
                         </span>
                          {/*<label style={{color: "black"}} id="selectID" htmlFor="statesSelect">State</label>*/}
@@ -238,12 +338,12 @@ const AddContactInfo = async (e) => {
                     <Row>
                     <span className="form-Adderess">
                         {/* when the event "e" is change it will call the function to get the data the useState*/}
-                        <input onChange={ e => setContact({...contact, phoneInfo: e.target.value})} className="address" placeholder="Phone Number" type="text" required/>
+                        <input onChange={ e => setContact({...contact, phoneInfo: e.target.value})} className="address" placeholder="Phone Number" id="PHONE1" type="text" maxLength="10" required/>
                         {/*<label>Phone Number<span style={{color: "red"}}>*</span></label>*/}
                     </span>
                     <span className="form-Adderess">
                         {/* when the event "e" is change it will call the function to get the data the useState*/}
-                        <input onChange={ e => setContact({...contact, emailInfo: e.target.value})} className="address" placeholder="Email Address" type="text" required/>
+                        <input onChange={ e => setContact({...contact, emailInfo: e.target.value})} className="address" placeholder="Email Address" id="EMAIL" type="text" required/>
                         {/*<label>Email Address<span style={{color: "red"}}>*</span></label>*/}
                     </span>
 
@@ -262,17 +362,17 @@ const AddContactInfo = async (e) => {
                         </Row>
                         <Row>
                             {/* when the event "e" is change it will call the function to get the data the useState*/}
-                            <input onChange={e => setDataMethods({...dataMethods, dataReport: e.target.value})} type="CHECKBOX" id="requstCheck" />
+                            <input onChange={e => setDataMethods({...dataMethods, dataReport: e.target.value})} type="CHECKBOX" id="requstCheck" name="check1"/>
                             <label className="requestLabel" >Personal data report</label>
                         </Row>
                          <Row>
                             {/* when the event "e" is change it will call the function to get the data the useState*/}
-                            <input onChange={e => setDataMethods({...dataMethods, dataRetrival: e.target.value})} type="CHECKBOX" id="requstCheck" />
+                            <input onChange={e => setDataMethods({...dataMethods, dataRetrival: e.target.value})} type="CHECKBOX" id="requstCheck" name="check1" />
                             <label className="requestLabel" >Personal data retrieval</label>
                         </Row>
                          <Row>
                             {/* when the event "e" is change it will call the function to get the data the useState*/}
-                            <input onChange={e => setContact({...contact, dataMethods: e.target.value})} type="CHECKBOX" id="requstCheck" />
+                            <input onChange={e => setContact({...contact, dataMethods: e.target.value})} type="CHECKBOX" id="requstCheck" name="check1" />
                             <label className="requestLabel" >Personal data purge</label>
                         </Row>
                     </td>

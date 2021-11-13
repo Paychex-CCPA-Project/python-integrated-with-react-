@@ -15,6 +15,7 @@
 }
 input{
     padding: 5px;
+    border-bottom-color: orangered;
 }
 .email-group{
     display: flex;

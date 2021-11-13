@@ -7,7 +7,11 @@ table{
   border-radius: 10px;
 
 }
-
+#validateInput{
+  border-bottom-color: red;
+  color: black;
+  background-color: ghostwhite;
+}
 table, td {
   border-width: 0.001em;
   border-spacing: 15px;
