@@ -73,6 +73,24 @@ const App = () => {
     // ----------------------------------------------------------
     // this function will check if the input fields are empty
     // if the inputs are empty the validForm variable will change to false not allowing the form to post
+    const validateEmail = () =>{
+        let validForm = true
+        if (contact.emailInfo === "") {
+                validForm = false
+                error.push("Email address is not filled in")
+                let email = document.getElementById("EMAIL")
+                email.id = "validateInput"
+        }else if(contact.emailInfo === /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/){
+                validForm = true
+                let email = document.getElementById("EMAIL")
+                email.id = "validateInput"
+        }else{
+            validForm = false
+            error.push("email not in the correct format")
+        }
+        return validForm
+    }
+    
     const validateForm = () => {
         let validForm = true
         var checkBox = document.getElementsByName("check1")
@@ -98,14 +116,8 @@ const App = () => {
         if (contact.address1 === "") {
             validForm = false
             error.push("Address is not filled in")
-            let ad1 = document.getElementById("ad1")
+            let ad1 = document.getElementBId("ad1")
             ad1.id = "validateInput"
-        }
-        if (contact.emailInfo === "") {
-            validForm = false
-            error.push("Email address is not filled in")
-            let email = document.getElementById("EMAIL")
-            email.id = "validateInput"
         }
         if (contact.phoneInfo === "") {
             validForm = false
@@ -131,7 +143,7 @@ const App = () => {
             let city = document.getElementById("CITY")
             city.id = "validateInput"
         }
-        // checks if any checkboxes have been selected 
+        // checks if any checkboxes have been selected
         var okay = false
         for (var i = 0; i < checkBox.length; i++) {
             if (checkBox[i].checked) {
@@ -145,7 +157,6 @@ const App = () => {
             checkbox.id = "validateChecks"
             validForm = false
         }
-
         return validForm
     }
     // ----------------------------------------------------------
@@ -153,9 +164,9 @@ const App = () => {
     const AddContactInfo = async (e) => {
         // prevents the form from falling into default
         e.preventDefault()
-
+        // ----------------------------------------------------------
         // will post if the validate form function is true
-        if (validateForm()) {
+        if (validateForm() && validateEmail()) {
             let dataMeothds = {
                 radio1: dataMethods.radio1,
                 radio2: dataMethods.radio2,
