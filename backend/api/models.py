@@ -12,6 +12,8 @@ class DataMethod(models.Model):
     dataRetrival = models.BooleanField(default=False)
     radio1 = models.BooleanField(default=False)
     radio2 = models.BooleanField(default=False)
+    actionType = models.CharField(max_length=300)
+    extraInfo = models.CharField(max_length=300)
 
 class Contact(models.Model):
     fName = models.CharField(max_length=300, null=True, blank=False, default='First name not given')
