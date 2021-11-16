@@ -6,10 +6,21 @@ from .models import *
 
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
-    list_display = ("id","lName","fName", "emailInfo")
-    search_fields = ("lName__startswith",)
+    list_display = ( "Full_Name", "emailInfo",)
+    search_fields = ("lName","fName" )
 
-@admin.register(DataMethod)
-class DataMethodAdmin(admin.ModelAdmin):
-    list_filter = ("dataPurge", "dataReport", "dataRetrival")
+    def Full_Name(self,obj):
+        return "{} {} {}".format(obj.fName, obj.mName, obj.lName)
 
+@admin.register (DataMethod)
+class DataMethods(admin.ModelAdmin):
+    list_display = ("id", )
+    fieldsets = (
+        ('Data Methods', {
+                'fields':('dataPurge','dataReport','dataRetrival', 'radio1','radio2')
+        }),
+        ('Extra Info', {
+            'fields':('actionType', 'extraInfo')
+        }),
+
+    )
