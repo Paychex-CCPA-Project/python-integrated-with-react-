@@ -74,21 +74,20 @@ const App = () => {
     // this function will check if the input fields are empty
     // if the inputs are empty the validForm variable will change to false not allowing the form to post
     // validates the email
-     const validateEmail = () =>{
+    const validateEmail = () => {
         let validForm = true
         var regexEmail = /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
-        if (contact.emailInfo === "") {
+        try {
+            if (contact.emailInfo.match(regexEmail)) {
+                validForm = true
+            } else {
                 validForm = false
-                error.push("Email address is not filled in")
+                error.push("The email is not valid")
                 let email = document.getElementById("EMAIL")
                 email.id = "validateInput"
-        }else if(contact.emailInfo.match(regexEmail)) {
-            validForm = true
-        }else{
+            }
+        } catch {
             validForm = false
-            error.push("Email he email is not valid")
-            let email = document.getElementById("EMAIL")
-            email.id = "validateInput"
         }
         return validForm
     }
