@@ -73,24 +73,27 @@ const App = () => {
     // ----------------------------------------------------------
     // this function will check if the input fields are empty
     // if the inputs are empty the validForm variable will change to false not allowing the form to post
-    const validateEmail = () =>{
+    // validates the email
+     const validateEmail = () =>{
         let validForm = true
+        var regexEmail = /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
         if (contact.emailInfo === "") {
                 validForm = false
                 error.push("Email address is not filled in")
                 let email = document.getElementById("EMAIL")
                 email.id = "validateInput"
-        }else if(contact.emailInfo === /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/){
-                validForm = true
-                let email = document.getElementById("EMAIL")
-                email.id = "validateInput"
+        }else if(contact.emailInfo.match(regexEmail)) {
+            validForm = true
         }else{
             validForm = false
-            error.push("email not in the correct format")
+            error.push("Email he email is not valid")
+            let email = document.getElementById("EMAIL")
+            email.id = "validateInput"
         }
         return validForm
     }
-    
+    // ----------------------------------------------------------
+    // validates the rest of the form
     const validateForm = () => {
         let validForm = true
         var checkBox = document.getElementsByName("check1")
@@ -105,6 +108,7 @@ const App = () => {
             validForm = false
             error.push("Middle Name is not filled in")
             let MNAME = document.getElementById("MNAME")
+            MNAME.innerHTML = "Middle Name is not filled in"
             MNAME.id = "validateInput"
         }
         if (contact.lName === "") {
@@ -163,6 +167,7 @@ const App = () => {
     // async function that post the collected user data or prints error messages to the screen
     const AddContactInfo = async (e) => {
         // prevents the form from falling into default
+
         e.preventDefault()
         // ----------------------------------------------------------
         // will post if the validate form function is true
