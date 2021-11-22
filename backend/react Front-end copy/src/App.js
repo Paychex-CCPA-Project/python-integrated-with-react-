@@ -62,7 +62,8 @@ const App = () => {
         var btn = value
         btn1 = btn
         console.log(btn)
-        if (btn1.length != 0) {
+        // eslint-disable-next-line eqeqeq
+        if (btn1.length !== 0) {
             setChecked(false)
         } else if (btn1.length === 0) {
             alert("Please confirm you are a human")
@@ -77,17 +78,17 @@ const App = () => {
     const validateEmail = () => {
         let validForm = true
         var regexEmail = /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
+        let email = document.getElementById("EMAIL")
         try {
-            if (contact.emailInfo.match(regexEmail)) {
-                validForm = true
-            } else {
-                validForm = false
-                error.push("The email is not valid")
-                let email = document.getElementById("EMAIL")
-                email.id = "validateInput"
-            }
-        } catch {
+            if (contact.emailInfo.match(regexEmail)) validForm = true
+            else validForm = false
+        }
+        catch {
             validForm = false
+        }
+        if(!validForm){
+            error.push("The email is not valid")
+            email.id = "validateInput"
         }
         return validForm
     }
@@ -119,7 +120,7 @@ const App = () => {
         if (contact.address1 === "") {
             validForm = false
             error.push("Address is not filled in")
-            let ad1 = document.getElementBId("ad1")
+            let ad1 = document.getElementById("ad1")
             ad1.id = "validateInput"
         }
         if (contact.phoneInfo === "") {
