@@ -80,8 +80,7 @@ const App = () => {
         var regexEmail = /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
         let email = document.getElementById("EMAIL")
         try {
-            if (contact.emailInfo.match(regexEmail)) validForm = true
-            else validForm = false
+            validForm = !!contact.emailInfo.match(regexEmail);
         }
         catch {
             validForm = false
