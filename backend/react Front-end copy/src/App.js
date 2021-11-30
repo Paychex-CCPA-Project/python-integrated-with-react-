@@ -205,19 +205,11 @@ const App = () => {
                     setSub(true)
                 })
                 .catch(err => {
-                    if (err.response) {
-                        console.log(err.response)
-                    } else if (err.request) {
-                        alert(err.request)
-                    } else {
-                        alert('error: ' + err)
-                    }
+                    alert('error: ' + err)
                 })
         } else {
             // will print out all error messages that will tell users what they have not filled out
             alert(Array.from(error))
-
-
         }
     }
 
@@ -355,7 +347,7 @@ const App = () => {
                             {/* when the event "e" is change it will call the function to get the data the useState*/}
                                             <input onChange={e => setContact({...contact, zip: e.target.value})}
                                                    name="setAddress1" placeholder="Zip" className="city" id="ZIP"
-                                                   type="text" required/>
+                                                   type="text" maxLength="5" required/>
 
                         </span>
                                         {/*<label style={{color: "black"}} id="selectID" htmlFor="statesSelect">State</label>*/}

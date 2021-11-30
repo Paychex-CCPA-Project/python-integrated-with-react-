@@ -10,7 +10,7 @@ const Success = (Name) => {
                 Your request was successfully submitted
             </th>
             <Row>
-                Thank you {Name.fName} {Name.lName}, we will get back to you as soon as possible
+                Thank you {Name.fName} {Name.lName}! We will get back to you as soon as possible.
             </Row>
         </div>
     );
