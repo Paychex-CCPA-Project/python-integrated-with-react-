@@ -1,0 +1,11 @@
+#!/bin/bash 
+
+
+docker login -u operatingSys -p n30Dv6YqEnH8Q+inhyJu4s=zsvkkYhpk  operatingsys.azurecr.io
+
+docker tag python-django:latest operatingsys.azurecr.io/python-django2
+
+docker push operatingsys.azurecr.io/python-django2
+
+docker  
+ 

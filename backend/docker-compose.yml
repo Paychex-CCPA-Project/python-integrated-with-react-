@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  app:
+    build: . 
+    volumes:
+      - .:/django
+    ports: 
+      - 8000:8000
+    image: app:djano
+    container_name: django_container 
+    command: python3 manage.py runserver 0.0.0.0:8000
+  db: 
+    image: mongo 
+    volumes: 
+      - ./data/db:/var/lib/mongo/data 
+    ports:
+      - 27017:27017
+    container_name: mongo
+    
+
+    
+
+
+
